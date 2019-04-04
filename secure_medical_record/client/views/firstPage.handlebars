@@ -1,0 +1,36 @@
+<div class="container-fluid" onload="hideNavbar()">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- form start-->
+            <div class="wrapper">
+            <form class="form-container" >
+                <div class="col-xs-8 col-xs-offset-4 center-block "> 
+
+                    <center><button type="submit" class="btn btn-lg" style="color:white; align:center;" onclick="patientBtnClicked(event)">Patient Login</button></center> 
+                </div>
+                </form>
+            </div>
+            <!-- form end-->
+            <div class="wrapper">
+            <form class="form-container" >
+                <div class="col-xs-8 col-xs-offset-4 center-block "> 
+
+                    <center><button type="submit" class="btn btn-lg" style="color:white; align:center;" onclick="practitionerBtnClicked(event)">Practitioner Login</button></center> 
+                </div>
+                </form>
+            </div>
+	     <br />
+	     <br />
+	     
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12"> </div>
+    </div>
+</div>
+    <script>
+    $(window).on('load',function(){
+      $("#headings").hide();
+    });
+</script>  
+</script>
+<script src="../js/main.js"></script>
