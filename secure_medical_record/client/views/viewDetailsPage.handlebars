@@ -1,0 +1,16 @@
+<div class="jumbotron" onload="homePageLoaded()">
+  {{#if result}}
+   <h1>Height: {{result.[0]}}</h1>
+   <h1>Weight: {{result.[1]}}</h1>
+   <h1>Age: {{result.[2]}}</h1>
+   <h1>Other Data: {{result.[3]}}</h1>
+   <h1>Symptoms: {{result.[4]}}</h1>
+   {{else}}
+   <h1>Health Record Not yet Added</h1>
+   {{/if}}
+</div>
+   
+      <script src="../js/main.js"></script>
+      <script type="text/javascript">
+        homePageLoaded();
+      </script>

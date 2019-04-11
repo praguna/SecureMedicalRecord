@@ -1,4 +1,3 @@
-<body>
 <div class="container-fluid" onload="hideNavbar()">
     <div class="row">
         <div class="col-md-4 col-sm-4 col-xs-12"></div>
@@ -7,27 +6,25 @@
             <div class="wrapper">
             <form class="form-container" method="POST">
                 <div class="form-group">
-                    <div style="color: white;text-align:center; font-family:'Open Sans', sans-serif;font-weight: normal; font-size: 25px;">Patient ID</div>
-                    <input name="patientID" type="text" class="form-control" id="patientId" placeholder="eg: alice">
-                   <br>
-                    <input name="patientPassword" type="password" class="form-control" id="patientPassword">
-
+                    <div style="color: white;text-align:center; font-family:'Open Sans', sans-serif;font-weight: normal; font-size: 25px;">Practitioner ID</div>
+                    <br />
+                    <input type="text" name="practitionerID" class="form-control" id="loginId" placeholder="eg: alice">
+                    <br>
+                    <input type="password" name="practitionerPassword" class="form-control" id="passwdId">
                 </div>
                 <div class="col-xs-8 col-xs-offset-4 center-block "> 
 
-                    <center><button type="submit" class="btn btn-lg" style="color:white; align:center;" onclick="LoginPatient(event)">Login</button></center> 
+                    <center><button type="submit" class="btn btn-lg" style="color:white; align:center;" onclick="LoginPractitioner(event)">Sign-UP</button></center> 
                 </div>
                 </form>
             </div>
             <!-- form end-->
 	     <br />
 	     <br />
-	    
-        </div>
+	        </div>
         <div class="col-md-4 col-sm-4 col-xs-12"> </div>
     </div>
 </div>
-
     <script>
     $(window).on('load',function(){
       $("#headings").hide();
@@ -35,4 +32,3 @@
 </script>  
 </script>
 <script src="../js/main.js"></script>
-</body>

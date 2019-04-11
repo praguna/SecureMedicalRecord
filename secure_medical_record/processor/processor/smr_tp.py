@@ -1,17 +1,5 @@
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ------------------------------------------------------------------------------
 '''
-Transaction family class for simplewallet.
+Transaction family class for smr.
 '''
 
 import traceback
@@ -26,18 +14,18 @@ from sawtooth_sdk.processor.core import TransactionProcessor
 
 LOGGER = logging.getLogger(__name__)
 
-FAMILY_NAME = "simplewallet"
+FAMILY_NAME = "smr"
 
 def _hash(data):
     '''Compute the SHA-512 hash and return the result as hex characters.'''
     return hashlib.sha512(data).hexdigest()
 
-# Prefix for simplewallet is the first six hex digits of SHA-512(TF name).
+# Prefix for smr is the first six hex digits of SHA-512(TF name).
 sw_namespace = _hash(FAMILY_NAME.encode('utf-8'))[0:6]
 
 class SmrTransactionHandler(TransactionHandler):
     '''                                                       
-    Transaction Processor class for the simplewallet transaction family.       
+    Transaction Processor class for the smr transaction family.       
                                                               
     This with the validator using the accept/get/set functions.
     It implements functions to deposit, withdraw, and transfer money.
@@ -62,10 +50,10 @@ class SmrTransactionHandler(TransactionHandler):
         '''This implements the apply function for this transaction handler.
                                                               
            This function does most of the work for this class by processing
-           a single transaction for the simplewallet transaction family.   
+           a single transaction for the smr transaction family.   
         '''                                                   
         
-        # Get the payload and extract simplewallet-specific information.
+        # Get the payload and extract smr-specific information.
         header = transaction.header
         payload_list = transaction.payload.decode().split(",")
         operation = payload_list[0]
@@ -85,6 +73,10 @@ class SmrTransactionHandler(TransactionHandler):
             if len(payload_list) == 3:
                 to_key = payload_list[2]
             self._make_transfer(context, amount, to_key, from_key)
+        elif operation=="insert_record":
+            self.insert_record(context,amount,from_key)
+        elif operation=="retrieve_record":
+            self.retrieve_record(context)
         else:
             LOGGER.info("Unhandled action. " +
                 "Operation should be deposit, withdraw or transfer")
@@ -172,12 +164,17 @@ class SmrTransactionHandler(TransactionHandler):
     def _get_wallet_address(self, from_key):
         return _hash(FAMILY_NAME.encode('utf-8'))[0:6] + _hash(from_key.encode('utf-8'))[0:64]
 
+    def insert_record(self,context,data,from_key):
+          health_record_address= _hash(FAMILY_NAME.encode('utf-8'))[0:6]+ _hash("patient".encode('utf-8'))[0:6]+_hash(from_key.encode('utf-8'))[0:6]+_hash('health_record'.encode('utf-8'))[0:52]
+          addresses = context.set_state({health_record_address: data.encode('utf-8')})  
+
+
 def setup_loggers():
     logging.basicConfig()
     logging.getLogger().setLevel(logging.DEBUG)
 
 def main():
-    '''Entry-point function for the simplewallet transaction processor.'''
+    '''Entry-point function for the smr transaction processor.'''
     setup_loggers()
     try:
         # Register the transaction handler and start it.

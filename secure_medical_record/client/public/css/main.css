@@ -46,6 +46,21 @@ input[type=number] {
     height: 65vh;
     text-align: center;
 }
+.jumbotron2 {
+    background-color: rgb(59,56,56);
+    margin: 8vh 50vh ;
+    height: 45vh;
+    width: 75vh;
+    text-align: center;
+}
+.jumbotron3 {
+    background-color: rgb(59,56,56);
+    margin: 8vh 75vh ;
+    height: 25vh;
+    width: 50vh;
+    text-align: center;
+    padding-top: 10vh;
+}
 .btn{
     background-color: rgb(118,113,113);
     border: none;

@@ -17,6 +17,7 @@
 
 //Function to display the user details on the top right of the webpage
 function getUserDetails() {
+    //var userId = document.getElementById('patientID').value
     var user = sessionStorage.getItem("userId");
     document.getElementById("userCredentials").innerHTML ="Welcome " + user.toUpperCase() + " |";
 }  
@@ -31,35 +32,48 @@ function patientBtnClicked(event) {
     window.location.href = "/loginPatient";
     
 }
+function patientsignupBtnClicked(event) {
+    event.preventDefault();
+    window.location.href = "/signupPatient";
+    
+}
 function practitionerBtnClicked(event) {
     event.preventDefault();
     window.location.href = "/loginPractitioner";
     
 }
-//Validate
-function loginBtnClicked(event) {
+function practitionersignupBtnClicked(event) {
     event.preventDefault();
-    var userId = document.getElementById('loginId').value;
-    if (userId == "") {
-        alert("Please Enter User ID");
-        window.location.href = '/login';
-    } else {
-        $.post('/login', { userId: userId },
-        function (data, textStatus, jqXHR) {
-            if (data.done == 1) {
-                sessionStorage.clear();
-                sessionStorage.setItem("userId" , data.userId);
-                // some delay before redirecting to homepage
-                // to allow sessionstorage to complete
-                setTimeout(null, 101);
-                alert(data.message);
-                window.location.href = "/home";
-            } else {
-                alert(data.message);
-                window.location.href = "/login";
-            }
-        },'json');
-    }
+    window.location.href = "/signupPractitioner";
+    
+}
+function viewDetails(event) {
+    event.preventDefault();
+    window.location.href = "/viewDetails";
+    
+}
+function viewPractitioner(event) {
+    event.preventDefault();
+    window.location.href = "/viewPractitioner";
+    
+}
+function viewLog(event) {
+    event.preventDefault();
+    window.location.href = "/viewLog";
+    
+}
+
+function enterDetails(event) {
+    event.preventDefault();
+    window.location.href = "/enterDetails";
+    
+}
+
+
+function payDetails(event) {
+    event.preventDefault();
+    window.location.href = "/transfer";
+    
 }
 
 //Successful Logout

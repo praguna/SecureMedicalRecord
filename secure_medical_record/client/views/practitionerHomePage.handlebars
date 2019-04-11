@@ -1,0 +1,15 @@
+{{#each patients}}
+
+<div class="jumbotron2" onload="homePageLoaded()" align="center">
+    <div class="wrapper">
+    <h1>Patient Name: {{this.patientID}}</h1>
+        <center><a href="enterDetails/{{this._id}}"><button type="submit" class="btn btn-lg" style="color:white; align:center;" >Enter Details</button></a></center> 
+    </div>
+</div>
+{{/each}}
+
+      <script src="../js/main.js"></script>
+      <script type="text/javascript">
+        homePageLoaded();
+      </script>
+{{!-- <script src="../js/loginPage.js"></script> --}}

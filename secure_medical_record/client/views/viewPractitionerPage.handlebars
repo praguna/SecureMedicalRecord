@@ -1,0 +1,16 @@
+
+{{#each practitioners}} 
+<div class="jumbotron2" onload="homePageLoaded()" align="center">
+    <div class="wrapper">
+    <h1>Practitioner Name: {{this.practitionerID}} </h1>
+        <center><button type="submit" class="btn btn-lg" style="color:white; align:center;" onclick="giveConsent(event)">Give Consent</button></center> 
+        <br>
+                <center><button type="submit" class="btn btn-lg" style="color:white; align:center;" onclick="payDetails(event)">Pay</button></center> 
+    </div>
+</div>
+{{/each}}
+      <script src="../js/main.js"></script>
+      <script type="text/javascript">
+        homePageLoaded();
+      </script>
+{{!-- <script src="../js/loginPage.js"></script> --}}

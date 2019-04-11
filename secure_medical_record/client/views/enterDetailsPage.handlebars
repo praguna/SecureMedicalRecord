@@ -1,0 +1,39 @@
+<form method="POST">
+<div class="jumbotron" onload="homePageLoaded()">
+    <label> 
+                    <font color="white">Height:</font>
+                    <input name="height" type="text" class="form-control" id="height">
+                    </label>
+                   <br>
+                   <label><font color="white">
+                    Weight:</font>
+                    <input name="weight" type="text" class="form-control" id="weight">
+                    </label>
+                    <br>
+                    <label><font color="white">
+                    Age:</font>
+                    <input name="age" type="text" class="form-control" id="age">
+                    </label>
+                    <br>
+                    <label><font color="white">
+                    Other Data:</font>
+                    <input name="odata" type="text" class="form-control" id="odata">
+                    </label>
+                    <br>
+                    <label><font color="white">
+                    Symptoms:</font>
+                    <input name="symptoms" type="text" class="form-control" id="symptoms">
+                    </label> 
+                    <br>
+                    <br>
+                    <br>
+                    <label>
+                    <button type="submit" class="btn btn-lg" style="color:white; align:center;" onclick="LoginPatient(event)">Submit</button>
+                    </label>
+</div>
+</form>
+      <script src="../js/main.js"></script>
+      <script type="text/javascript">
+        homePageLoaded();
+      </script>
+{{!-- <script src="../js/loginPage.js"></script> --}}

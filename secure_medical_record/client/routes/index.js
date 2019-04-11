@@ -1,25 +1,14 @@
-/**
- * Copyright 2018 Intel Corporation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ------------------------------------------------------------------------------
- */
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
-var {SmrClient} = require('./SmrClient') 
-
+var {SmrClient1} = require('./SmrClient1');
+var {SmrClient} = require('./SmrClient');
+var patientController = require('../controllers/patientController');
+var patientSignupController = require('../controllers/patientSignupController');
+var practitionerController = require('../controllers/practitionerController');
+var practitionerSignupController = require('../controllers/practitionerSignupController');
+var consentController=require('../controllers/consentController')
+const notifier = require('node-notifier');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/', function(req, res){
@@ -34,6 +23,12 @@ router.get('/loginSelect', function(req, res){
 router.get('/loginPatient', function(req, res){
     res.render('loginPagePatient');
 });
+router.get('/signupPatient', function(req, res){
+    res.render('signupPatientPage');
+});
+router.get('/signupPractitioner', function(req, res){
+    res.render('signupPractitionerPage');
+});
 
 router.get('/loginPractitioner', function(req, res){
     res.render('loginPagePractitioner');
@@ -47,12 +42,52 @@ router.get('/home', function(req, res){
 router.get('/deposit',function(req, res){
     res.render('depositPage');
 })
+router.get('/practitioner/enterDetails/:id',function(req,res){
+    res.render('enterDetailsPage')
+});
+
+router.post('/practitioner/enterDetails/:id',function(req,res){
+    var client=new SmrClient1(req.params.id,'patient')
+    var data={height:req.body.height,weight:req.body.weight,age:req.body.age,odata:req.body.odata,symptoms:req.body.symptoms}
+    client.insert_health_record(data);
+    console.log('Successful Submission')
+    res.redirect('back');
+    notifier.notify('Successfully Submitted!');
+});
+
+router.get('/patient/:id',function(req,res){
+    res.render('patientHomePage',{id:req.params.id})
+});
+
+router.get('/practitioner/:id',patientController.patient_data);
 
 //Get Withdraw view
 router.get('/withdraw',function(req, res){
     res.render('withdrawPage');
 })
 
+router.get('/patient/:id/viewDetails',function(req, res){
+    var client=new SmrClient1(req.params.id,'patient')
+    let data=client.get_health_record(req.id)
+    data.then(function(result){
+        //console.log(result);
+        res.render('viewDetailsPage',{result:result});
+    });
+})
+
+router.get('/patient/:id/viewPractitioner', practitionerController.practitioner_data);
+
+router.get('/patient/:id/viewLog',function(req, res){
+    res.render('viewLogPage');
+})
+router.get('/patientHome',function(req, res){
+    res.render('patientHomePage');
+})
+router.get('/enterDetails',function(req, res){
+    res.render('enterDetailsPage');
+})
+
+router.get('/consent/:id/:pid',consentController.patient_consent);
 //Get Transfer View
 router.get('/transfer',function(req, res){
     res.render('transferPage');
@@ -64,11 +99,18 @@ router.get('/balance', function(req, res){
 })
 
 //recieve data from login page and save it.
-router.post('/login', urlencodedParser, function(req, res){
-    var userid = req.body.userId;
-    res.send({done:1, userId: userid, message: "User Successfully Logged in as "+userid  });
-});
+router.post('/loginPatient',patientController.patientLogin_post);
 
+router.post('/signupPatient',patientSignupController.patientLogin_post);
+
+router.post('/signupPractitioner',practitionerSignupController.practitionerLogin_post);
+
+
+
+router.post('/loginPractitioner',practitionerController.practitionerLogin_post);
+
+
+router.post('/loginPractitioner',practitionerController.practitionerLogin_post);
 //function to deposit amount in server
 router.post('/deposit', function(req, res) {
     var userId = req.body.userId;
