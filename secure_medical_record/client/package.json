@@ -17,7 +17,7 @@
     "mongoose": "^5.4.17",
     "node-cmd": "^3.0.0",
     "node-fetch": "^2.1.2",
-    "node-notifier": "^5.4.0",
+    "node-notifier": "^8.0.1",
     "sawtooth-sdk": "^1.0.2",
     "text-encoding": "^0.6.4",
     "utf8": "^3.0.0"
