@@ -14,7 +14,7 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "fs": "0.0.1-security",
-    "mongoose": "^5.4.17",
+    "mongoose": "^5.7.5",
     "node-cmd": "^3.0.0",
     "node-fetch": "^2.1.2",
     "node-notifier": "^5.4.0",
